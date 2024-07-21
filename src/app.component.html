@@ -1,0 +1,41 @@
+<app-header />
+<main>
+  <ul id="users">
+    <!-- Adding each user using an seperate tag-->
+    <!-- <li>
+      <app-user [user]="users[0]" (select)="onSelectedUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[1]" (select)="onSelectedUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[2]" (select)="onSelectedUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[3]" (select)="onSelectedUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[4]" (select)="onSelectedUser($event)" />
+    </li>
+    <li>
+      <app-user [user]="users[5]" (select)="onSelectedUser($event)" />
+    </li> -->
+    @for(user of users ; track user.id){
+    <li>
+      <app-user
+        [user]="user"
+        [selected]="user.id === selectedUserId()"
+        (select)="onSelectedUser($event)"
+      />
+    </li>
+    }
+  </ul>
+  @if (userNameUpdate() && userNameUpdate().length > 1){
+  <user-tasks
+    [userName]="userNameUpdate()"
+    [selectedUserId]="selectedUserId()"
+  />
+  }@else {
+  <p id="fallback">Select an user to see their tasks!</p>
+  }
+</main>

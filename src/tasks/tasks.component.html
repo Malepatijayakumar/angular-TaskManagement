@@ -1,0 +1,23 @@
+@if(isAddingNewTask){
+<new-task
+  [userId]="selectedUserId"
+  (isCloseActive)="handleCloseAddingTask($event)"
+/>
+}
+<section id="tasks">
+  <header>
+    <h2>{{ userName() }}'s Tasks</h2>
+    <menu>
+      <button (click)="handleAddingNewTask()">Add Task</button>
+    </menu>
+  </header>
+  <ul>
+    @for( task of getUserTasks(); track task.id) { @if(task.userId ==
+    selectedUserId){
+    <task-details
+      [task]="task"
+      (completedTaskId)="handleTaskComplete($event)"
+    />
+    } }
+  </ul>
+</section>
